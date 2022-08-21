@@ -5,10 +5,10 @@ public class AnimatedSprite : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer { get; private set; }
 
-    public Sprite[] sprites;
-    private float animationTime = 0.25f;
+    [SerializeField] Sprite[] sprites;
+    private float animationTime = 0.125f;
     public int animationFrame { get; private set; }
-    public bool loop = true;
+    [SerializeField] bool loop = true;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
