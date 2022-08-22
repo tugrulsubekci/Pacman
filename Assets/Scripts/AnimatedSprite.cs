@@ -6,7 +6,7 @@ public class AnimatedSprite : MonoBehaviour
     public SpriteRenderer spriteRenderer { get; private set; }
 
     [SerializeField] Sprite[] sprites;
-    private float animationTime = 0.125f;
+    [SerializeField] float animationTime = 0.25f;
     public int animationFrame { get; private set; }
     [SerializeField] bool loop = true;
     private void Awake()
@@ -15,23 +15,23 @@ public class AnimatedSprite : MonoBehaviour
     }
     private void Start()
     {
-        InvokeRepeating(nameof(Advance),animationTime,animationTime);
+        InvokeRepeating(nameof(Advance), animationTime, animationTime);
     }
 
     private void Advance()
     {
-        if(!spriteRenderer.enabled)
+        if (!spriteRenderer.enabled)
         {
             return;
         }
         animationFrame++;
 
-        if(animationFrame >= sprites.Length)
+        if (animationFrame >= sprites.Length)
         {
             animationFrame = 0;
         }
 
-        if(animationFrame < sprites.Length && animationFrame >= 0)
+        if (animationFrame < sprites.Length && animationFrame >= 0)
         {
             spriteRenderer.sprite = sprites[animationFrame];
         }
