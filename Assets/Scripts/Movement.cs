@@ -3,9 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
-    private float speed = 8f;
+    [SerializeField] float speed = 8f;
     private float speedMultiplier = 1f;
-    private Vector2 initialDirection = new Vector2(1,0);
+    [SerializeField] Vector2 initialDirection;
     private LayerMask obstacleLayer;
 
     public new Rigidbody2D rigidbody { get; private set; }
