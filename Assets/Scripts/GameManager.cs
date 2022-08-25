@@ -1,4 +1,7 @@
 using UnityEngine;
+using TMPro;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,24 +13,24 @@ public class GameManager : MonoBehaviour
     public int score { get; private set; }
     public int lives { get; private set; }
 
+    // UI
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI highScoreText;
+    [SerializeField] List<GameObject> extraLives;
+    [SerializeField] GameObject gameOverPanel;
+
     private void Start()
     {
         NewGame();
     }
 
-    private void Update()
+    public void NewGame()
     {
-        if (lives <= 0 && Input.anyKeyDown)
-        {
-            NewGame();
-        }
-    }
-
-    private void NewGame()
-    {
+        LoadHighScore();
         SetScore(0);
         SetLives(3);
         NewRound();
+        gameOverPanel.SetActive(false);
     }
 
     private void NewRound()
@@ -65,18 +68,24 @@ public class GameManager : MonoBehaviour
     private void SetScore(int score)
     {
         this.score = score;
+        scoreText.text = this.score.ToString();
     }
 
     private void SetLives(int lives)
     {
         this.lives = lives;
+        UpdateLives();
     }
 
     public void GhostEaten(Ghost ghost)
     {
         int points = ghost.points * ghostMultiplier;
-        SetScore(score + ghost.points);
+        SetScore(score + points);
         ghostMultiplier++;
+        if(ghostMultiplier == 5 && lives < 5)
+        {
+            SetLives(this.lives + 1);
+        }
     }
 
     public void PacmanEaten()
@@ -91,7 +100,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            NewRound();
+            gameOverPanel.SetActive(true);
         }
     }
 
@@ -102,6 +111,7 @@ public class GameManager : MonoBehaviour
         if (!HasRemainingPellets())
         {
             pacman.gameObject.SetActive(false);
+            SaveHighScore(score);
             Invoke(nameof(NewRound), 3.0f);
         }
     }
@@ -133,5 +143,39 @@ public class GameManager : MonoBehaviour
     private void ResetGhostMultiplier()
     {
         ghostMultiplier = 1;
+    }
+
+    private void UpdateLives()
+    {
+        foreach (GameObject live in extraLives)
+        {
+            live.SetActive(false);
+        }
+        for (int i = 0; i < lives - 1; i++)
+        {
+            extraLives[i].SetActive(true);
+        }
+    }
+
+    private void SaveHighScore(int score)
+    {
+        if(score > DataManager.Instance.highScore)
+        {
+            DataManager.Instance.highScore = score;
+            DataManager.Instance.Save();
+            RefreshHighScore();
+        }
+    }
+
+    private void LoadHighScore()
+    {
+        DataManager.Instance.Load();
+        score = DataManager.Instance.highScore;
+        RefreshHighScore();
+    }
+
+    private void RefreshHighScore()
+    {
+        highScoreText.text = score.ToString();
     }
 }
