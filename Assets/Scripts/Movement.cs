@@ -3,8 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
+    [SerializeField] GhostEyes ghostEyes;
     [SerializeField] float speed = 8f;
-    private float speedMultiplier = 1f;
+    public float speedMultiplier = 1f;
     [SerializeField] Vector2 initialDirection;
     private LayerMask obstacleLayer;
 
@@ -62,7 +63,14 @@ public class Movement : MonoBehaviour
         {
             this.direction = direction;
             nextDirection = Vector2.zero;
-            RotatePacman();
+            if(gameObject.layer == LayerMask.NameToLayer("Pacman"))
+            {
+                RotatePacman();
+            }
+            if (gameObject.layer == LayerMask.NameToLayer("Ghost"))
+            {
+                ghostEyes.RotateEyes(direction);
+            }
         }
         else
         {
@@ -76,7 +84,7 @@ public class Movement : MonoBehaviour
         return hit.collider != null;
     }
 
-    private void RotatePacman()
+    public void RotatePacman()
     {
         if (direction == Vector2.right)
         {

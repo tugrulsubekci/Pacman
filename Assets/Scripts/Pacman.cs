@@ -30,4 +30,10 @@ public class Pacman : MonoBehaviour
             movement.SetDirection(Vector2.right);
         }
     }
+    public void ResetState()
+    {
+        gameObject.SetActive(true);
+        movement.ResetState();
+        movement.RotatePacman();
+    }
 }

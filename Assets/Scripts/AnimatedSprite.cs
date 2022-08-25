@@ -36,4 +36,10 @@ public class AnimatedSprite : MonoBehaviour
             spriteRenderer.sprite = sprites[animationFrame];
         }
     }
+    public void Restart()
+    {
+        animationFrame = -1;
+
+        Advance();
+    }
 }

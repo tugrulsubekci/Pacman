@@ -13,6 +13,10 @@ GameObject:
   - component: {fileID: 216524255607561314}
   - component: {fileID: 216524255607561313}
   - component: {fileID: 216524255607561312}
+  - component: {fileID: 1395060761942629510}
+  - component: {fileID: 6747968794514716908}
+  - component: {fileID: 1737921774348986301}
+  - component: {fileID: 1949143131905428151}
   m_Layer: 7
   m_Name: GhostBase
   m_TagString: Untagged
@@ -88,7 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20d229166bb63540828520062670c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostEyes: {fileID: 0}
   speed: 7
+  speedMultiplier: 1
   initialDirection: {x: 0, y: 0}
 --- !u!114 &216524255607561312
 MonoBehaviour:
@@ -102,7 +108,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139a1c3d166e65b42bbce11a886a397b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialBehaviour: {fileID: 0}
+  target: {fileID: 0}
   points: 200
+--- !u!114 &1395060761942629510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216524255607561342}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a40ef7b767e764a82d51085679b57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0
+  inside: {x: 0, y: 0.5, z: -1}
+  outside: {x: 0, y: 3.5, z: -1}
+--- !u!114 &6747968794514716908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216524255607561342}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc89fd8cb859f34e953136298cf3ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 7
+--- !u!114 &1737921774348986301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216524255607561342}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1eb529a72d13444d85c22ff1ba3b95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 20
+--- !u!114 &1949143131905428151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216524255607561342}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a195774b1a10d914ea5b057031394fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 8
+  body: {fileID: 0}
+  eyes: {fileID: 0}
+  blue: {fileID: 0}
+  white: {fileID: 0}
 --- !u!1 &1673350249599399169
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3140497759215830559}
   - component: {fileID: 3787380913029473386}
-  - component: {fileID: 5801713569866187582}
+  - component: {fileID: 1880082407098921183}
   m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
@@ -392,7 +458,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5801713569866187582
+--- !u!114 &1880082407098921183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -401,16 +467,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2724308376266246370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d10f33c0fb641d4083bd451ea97cc40, type: 3}
+  m_Script: {fileID: 11500000, guid: 94535b611421dbf46bcaa828089e82ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: fc4a1d20d72de6c49982cc9819a49033, type: 3}
-  - {fileID: 21300000, guid: 88a90bd065e98d343bb40afc62ebb661, type: 3}
-  - {fileID: 21300000, guid: 8defb407adf83344e9364d41a6c853b8, type: 3}
-  - {fileID: 21300000, guid: 81c52b2aeede7834bac6f277b5d946c1, type: 3}
-  animationTime: 0.25
-  loop: 1
+  spriteRenderer: {fileID: 0}
+  up: {fileID: 21300000, guid: fc4a1d20d72de6c49982cc9819a49033, type: 3}
+  down: {fileID: 21300000, guid: 88a90bd065e98d343bb40afc62ebb661, type: 3}
+  left: {fileID: 21300000, guid: 8defb407adf83344e9364d41a6c853b8, type: 3}
+  right: {fileID: 21300000, guid: 81c52b2aeede7834bac6f277b5d946c1, type: 3}
 --- !u!1 &5618705636914414796
 GameObject:
   m_ObjectHideFlags: 0
