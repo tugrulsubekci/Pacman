@@ -19,6 +19,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> extraLives;
     [SerializeField] GameObject gameOverPanel;
 
+    public bool isGameStarted;
+    public bool gameOver;
+    public bool isFrightenedActive;
+    private AudioManager audioManager;
+    [SerializeField] AnimatedSprite aliveAnim;
+    [SerializeField] AnimatedSprite deathAnim;
+    private void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
     private void Start()
     {
         NewGame();
@@ -31,10 +41,12 @@ public class GameManager : MonoBehaviour
         SetLives(3);
         NewRound();
         gameOverPanel.SetActive(false);
+        Invoke(nameof(StartGame),4.3f);
     }
 
     private void NewRound()
     {
+        audioManager.Play("Beginning");
         foreach(Transform pellet in pellets)
         {
             pellet.gameObject.SetActive(true);
@@ -45,6 +57,9 @@ public class GameManager : MonoBehaviour
 
     private void ResetState()
     {
+        Invoke("GameOverFalse",3.0f);
+        deathAnim.enabled = false;
+        aliveAnim.enabled = true;
         ResetGhostMultiplier();
         for (int i = 0; i < ghosts.Length; i++)
         {
@@ -54,15 +69,9 @@ public class GameManager : MonoBehaviour
         pacman.ResetState();
     }
 
-    private void GameOver()
+    private void GameOverFalse()
     {
-
-        for (int i = 0; i < ghosts.Length; i++)
-        {
-            ghosts[i].ResetState();
-        }
-
-        pacman.ResetState();
+        gameOver = false;
     }
 
     private void SetScore(int score)
@@ -79,19 +88,24 @@ public class GameManager : MonoBehaviour
 
     public void GhostEaten(Ghost ghost)
     {
+        audioManager.Play("EatGhost");
         int points = ghost.points * ghostMultiplier;
         SetScore(score + points);
         ghostMultiplier++;
         if(ghostMultiplier == 5 && lives < 5)
         {
+            audioManager.Play("ExtraPac");
             SetLives(this.lives + 1);
         }
     }
 
     public void PacmanEaten()
     {
-        pacman.gameObject.SetActive(false);
-
+        audioManager.Play("Death");
+        audioManager.Stop("Siren");
+        deathAnim.enabled = true;
+        aliveAnim.enabled = false;
+        gameOver = true;
         SetLives(lives - 1);
 
         if(lives > 0)
@@ -100,12 +114,20 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            gameOverPanel.SetActive(true);
+            Invoke(nameof(ActivateGameOverPanel), 3.0f);
         }
+    }
+    private void ActivateGameOverPanel()
+    {
+        gameOverPanel.SetActive(true);
     }
 
     public void PelletEaten(Pellet pellet)
     {
+        if (!audioManager.sounds[4].source.isPlaying)
+        {
+            audioManager.Play("Munch");
+        }
         pellet.gameObject.SetActive(false);
         SetScore(score + pellet.points);
         if (!HasRemainingPellets())
@@ -118,6 +140,11 @@ public class GameManager : MonoBehaviour
 
     public void PowerPelletEaten(PowerPellet powerPellet)
     {
+        audioManager.Play("PowerPellet");
+        audioManager.Stop("Siren");
+        isFrightenedActive = true;
+        CancelInvoke(nameof(StopPowerPelletMusic));
+        Invoke(nameof(StopPowerPelletMusic), 8.0f);
         for (int i = 0; i < ghosts.Length; i++)
         {
             ghosts[i].frightened.Enable(powerPellet.duration);
@@ -178,4 +205,24 @@ public class GameManager : MonoBehaviour
     {
         highScoreText.text = score.ToString();
     }
+
+    private void StartGame()
+    {
+        isGameStarted = true;
+    }
+
+    private void StopPowerPelletMusic()
+    {
+        isFrightenedActive = false;
+        audioManager.Stop("PowerPellet");
+    }
+
+    public void PlaySiren()
+    {
+        if (!audioManager.sounds[5].source.isPlaying && !isFrightenedActive)
+        {
+            audioManager.Play("Siren");
+        }
+    }
+
 }

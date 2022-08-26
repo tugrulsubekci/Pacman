@@ -13,7 +13,7 @@ public class AnimatedSprite : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    private void Start()
+    private void OnEnable()
     {
         InvokeRepeating(nameof(Advance), animationTime, animationTime);
     }
@@ -34,6 +34,10 @@ public class AnimatedSprite : MonoBehaviour
         if (animationFrame < sprites.Length && animationFrame >= 0)
         {
             spriteRenderer.sprite = sprites[animationFrame];
+            if(spriteRenderer.sprite == sprites[sprites.Length - 1] && !loop)
+            {
+                CancelInvoke("Advance");
+            }
         }
     }
     public void Restart()
@@ -41,5 +45,10 @@ public class AnimatedSprite : MonoBehaviour
         animationFrame = -1;
 
         Advance();
+    }
+    private void OnDisable()
+    {
+        CancelInvoke("Advance");
+        animationFrame = -1;
     }
 }

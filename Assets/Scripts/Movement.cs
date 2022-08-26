@@ -19,11 +19,14 @@ public class Movement : MonoBehaviour
     private Vector3 left = new Vector3(0, 0, 180);
     private Vector3 down = new Vector3(0, 0, 270);
 
+    [SerializeField] GameManager gameManager;
+
     private void Awake()
     {
         obstacleLayer = LayerMask.GetMask(LayerMask.LayerToName(9));
         rigidbody = GetComponent<Rigidbody2D>();
         startingPosition = transform.position;
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Start()
@@ -51,10 +54,14 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 position = rigidbody.position;
-        Vector2 translation = speed * speedMultiplier * Time.fixedDeltaTime * direction;
+        if(gameManager.isGameStarted && !gameManager.gameOver)
+        {
+            gameManager.PlaySiren();
+            Vector2 position = rigidbody.position;
+            Vector2 translation = speed * speedMultiplier * Time.fixedDeltaTime * direction;
 
-        rigidbody.MovePosition(position + translation);
+            rigidbody.MovePosition(position + translation);
+        }
     }
 
     public void SetDirection(Vector2 direction, bool forced = false)

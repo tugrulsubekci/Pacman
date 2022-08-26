@@ -701,9 +701,9 @@ RectTransform:
   m_Father: {fileID: 1148625271}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -500}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &303843028
@@ -823,9 +823,9 @@ RectTransform:
   m_Father: {fileID: 1148625271}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 500}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &455377536 stripped
@@ -1081,6 +1081,93 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139a1c3d166e65b42bbce11a886a397b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &612934879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 612934881}
+  - component: {fileID: 612934880}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &612934880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612934879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e3a4eba150996459c1b8157808d316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Death
+    clip: {fileID: 8300000, guid: 84c8fb5762ad62b42ad5a6c2abb9e8c4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ExtraPac
+    clip: {fileID: 8300000, guid: d17efaaafa2309948990cd4cbfe66fc1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EatGhost
+    clip: {fileID: 8300000, guid: eb95cde353cbdac4e85b4400f3440f6c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Beginning
+    clip: {fileID: 8300000, guid: 8818b5602537a2546af847dccf149a7c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Munch
+    clip: {fileID: 8300000, guid: 7054e434d21472e4ab6aeabc9daba6aa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Siren
+    clip: {fileID: 8300000, guid: 11191c1bf14c64e46b549b70ec0a1d66, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: PowerPellet
+    clip: {fileID: 8300000, guid: 274a96599a91a7244a32069eb5f40866, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+--- !u!4 &612934881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612934879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &631544772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,9 +1201,9 @@ RectTransform:
   m_Father: {fileID: 1148625271}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -500}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &681439752
@@ -1224,6 +1311,10 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1679311740}
+    - target: {fileID: 2887584316864667068, guid: 25246322e4f58a4499132fa66d63913d, type: 3}
+      propertyPath: duration
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4057669966192090436, guid: 25246322e4f58a4499132fa66d63913d, type: 3}
       propertyPath: m_Name
       value: Ghost_Pinky
@@ -3984,6 +4075,10 @@ MonoBehaviour:
   - {fileID: 502565523}
   - {fileID: 949261410}
   gameOverPanel: {fileID: 681439752}
+  isGameStarted: 0
+  gameOver: 0
+  aliveAnim: {fileID: 1156204652}
+  deathAnim: {fileID: 1156204656}
 --- !u!4 &866751350
 Transform:
   m_ObjectHideFlags: 0
@@ -4328,9 +4423,10 @@ GameObject:
   - component: {fileID: 1156204650}
   - component: {fileID: 1156204649}
   - component: {fileID: 1156204653}
-  - component: {fileID: 1156204652}
   - component: {fileID: 1156204654}
   - component: {fileID: 1156204655}
+  - component: {fileID: 1156204652}
+  - component: {fileID: 1156204656}
   m_Layer: 6
   m_Name: Pacman
   m_TagString: Untagged
@@ -4443,7 +4539,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 05b02f8183e6a7644b82bd1b396fad7e, type: 3}
   - {fileID: 21300000, guid: 7eaf59ecb73f55a4980b93212c6fd840, type: 3}
   - {fileID: 21300000, guid: 05b02f8183e6a7644b82bd1b396fad7e, type: 3}
-  animationTime: 0.125
+  animationTime: 0.075
   loop: 1
 --- !u!58 &1156204653
 CircleCollider2D:
@@ -4477,6 +4573,7 @@ MonoBehaviour:
   speed: 8
   speedMultiplier: 1
   initialDirection: {x: 1, y: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &1156204655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4489,6 +4586,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8234580d62150747adab825e02de440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1156204656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156204648}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d10f33c0fb641d4083bd451ea97cc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 42368aa7e93185344b6cfbf6117f75e1, type: 3}
+  - {fileID: 21300000, guid: 93b4ab3db6c3d3f4b93c85b21389ba50, type: 3}
+  - {fileID: 21300000, guid: 7f06c8cac50462047807590a1c7c74f2, type: 3}
+  - {fileID: 21300000, guid: 06cfaa3cccfe0644eab024d39c2c28e1, type: 3}
+  - {fileID: 21300000, guid: 601b0ed4ce607974ea327166341d4c81, type: 3}
+  - {fileID: 21300000, guid: b08ebe5733ae75745a408e170a59827c, type: 3}
+  - {fileID: 21300000, guid: 281b44b7ff6d3db4c8769536ea5e39fa, type: 3}
+  - {fileID: 21300000, guid: d3f685ad32aceac43a990bce621569f8, type: 3}
+  - {fileID: 21300000, guid: 637655c2505315a43a5bb5c5941ae023, type: 3}
+  - {fileID: 21300000, guid: 57228e162198521418cff9e8707c106e, type: 3}
+  - {fileID: 21300000, guid: 000fd623974a2d9419200539ad18d1a6, type: 3}
+  animationTime: 0.25
+  loop: 0
 --- !u!1 &1185468011
 GameObject:
   m_ObjectHideFlags: 0
@@ -10260,6 +10383,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 538481547524820357, guid: 0e4aab4414db9ba4e8c6d2cafb005a80, type: 3}
+      propertyPath: duration
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 1022940257628938716, guid: 0e4aab4414db9ba4e8c6d2cafb005a80, type: 3}
       propertyPath: spriteRenderer
       value: 
@@ -11809,6 +11936,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7310545102779924222, guid: 12c0b8148b3c4494dacd4cc1bf3abac4, type: 3}
+      propertyPath: duration
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7800061563684098727, guid: 12c0b8148b3c4494dacd4cc1bf3abac4, type: 3}
       propertyPath: spriteRenderer
       value: 
